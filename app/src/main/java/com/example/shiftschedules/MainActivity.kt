@@ -3,50 +3,28 @@ package com.example.shiftschedules
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
+import androidx.navigation.compose.rememberNavController
+import com.example.shiftschedules.ui.navigation.NavGraph
 import com.example.shiftschedules.ui.theme.ShiftSchedulesTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         setContent {
             ShiftSchedulesTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
+                Surface {
+                    val navController = rememberNavController()
+                    NavGraph(
+                        navController = navController,
+                        hoursWorkedThisWeek = "40",
+                        hoursRemainingThisWeek = "10",
+                        hoursWorkedThisMonth = "160",
+                        totalHoursWorked = "2000",
+                        daysWorked = "250"
                     )
                 }
             }
         }
-    }
-}
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Surface(color = Color.Cyan) {
-        Text(
-            text = "Hello $name!",
-            modifier = modifier.padding(24.dp)
-        )
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    ShiftSchedulesTheme {
-        Greeting("Android")
     }
 }

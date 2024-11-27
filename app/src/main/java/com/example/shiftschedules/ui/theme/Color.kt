@@ -2,10 +2,9 @@ package com.example.shiftschedules.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
-val Purple80 = Color(0xFFD0BCFF)
-val PurpleGrey80 = Color(0xFFCCC2DC)
-val Pink80 = Color(0xFFEFB8C8)
+val CardPrimary = Color(0xFF4CAF50)  // Example primary color for cards
+val CardSecondary = Color(0xFF2196F3) // Example secondary color for cards
+val CardTertiary = Color(0xFFFFC107) // Example tertiary color for cards
 
-val Purple40 = Color(0xFF6650a4)
-val PurpleGrey40 = Color(0xFF625b71)
-val Pink40 = Color(0xFF7D5260)
+val TextColorLight = Color(0xFFFFFFFF) // White color for text
+val TextColorDark = Color(0xFF000000)  // Black color for text

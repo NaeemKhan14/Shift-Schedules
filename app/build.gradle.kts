@@ -66,4 +66,6 @@ dependencies {
     implementation(libs.androidx.work.runtime.ktx)
     // Kotlin Coroutines (for background processing)
     implementation(libs.kotlinx.coroutines.android)
+    implementation(libs.androidx.navigation.compose)
+    implementation(libs.androidx.hilt.navigation.compose)
 }
