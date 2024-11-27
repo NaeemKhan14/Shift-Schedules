@@ -1,0 +1,15 @@
+com.example.shiftscheduler/
+    ├── data/
+    │   ├── models/          // Data models (e.g., Shift.kt)
+    │   ├── repositories/    // Repository classes for managing data
+    ├── domain/
+    │   ├── models/          // Domain-level models (immutable)
+    │   ├── usecases/        // Business logic
+    ├── ui/
+    │   ├── screens/         // Composable screens (Dashboard, ShiftDetails, etc.)
+    │   ├── components/      // Reusable composables (e.g., cards, buttons)
+    │   ├── theme/           // App theme (colors, typography)
+    │   ├── navigation/      // Navigation setup (NavHost, routes)
+    ├── utils/               // Utility functions/extensions
+    ├── MainApplication.kt   // Application class for setup
+    ├── MainActivity.kt      // Entry point
