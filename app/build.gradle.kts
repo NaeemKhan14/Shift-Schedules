@@ -68,4 +68,6 @@ dependencies {
     implementation(libs.kotlinx.coroutines.android)
     implementation(libs.androidx.navigation.compose)
     implementation(libs.androidx.hilt.navigation.compose)
+    // Accompanist for SVG/vector icons if you plan to use external icons
+    implementation(libs.accompanist.drawablepainter)
 }
