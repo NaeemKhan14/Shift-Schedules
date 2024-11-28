@@ -6,7 +6,6 @@ import androidx.compose.ui.test.assertIsDisplayed
 import org.junit.Rule
 import org.junit.Test
 
-
 class DashboardScreenTest {
 
     @get:Rule
@@ -28,8 +27,23 @@ class DashboardScreenTest {
                     "Fri" to "1",
                     "Sat" to "2"
                 ),
+                weeklyStats = listOf(
+                    "Total Shifts" to "5 Shifts",
+                    "Hours Worked" to "9 Hours",
+                    "Weekly Quota" to "+8 Hours"
+                ),
+                monthlyStats = listOf(
+                    "Total Shifts" to "5 Shifts",
+                    "Hours Worked" to "9 Hours",
+                    "Remaining Hours" to "8 Hours"
+                ),
                 nextShiftData = listOf(
                     "Date" to "2024-11-28",
+                    "Time" to "9:00 AM",
+                    "Hours" to "8 hours"
+                ),
+                prevShiftData = listOf(
+                    "Date" to "2024-11-27",
                     "Time" to "9:00 AM",
                     "Hours" to "8 hours"
                 )
@@ -49,11 +63,14 @@ class DashboardScreenTest {
                 bannerText = "Your Shifts",
                 location = "Berlin, Germany",
                 days = emptyList(),
+                weeklyStats = emptyList(),
+                monthlyStats = emptyList(),
                 nextShiftData = listOf(
                     "Date" to "2024-11-28",
                     "Time" to "9:00 AM",
                     "Hours" to "8 hours"
-                )
+                ),
+                prevShiftData = emptyList()
             )
         }
 
@@ -78,11 +95,14 @@ class DashboardScreenTest {
                     "Fri" to "1",
                     "Sat" to "2"
                 ),
+                weeklyStats = emptyList(),
+                monthlyStats = emptyList(),
                 nextShiftData = listOf(
                     "Date" to "2024-11-28",
                     "Time" to "9:00 AM",
                     "Hours" to "8 hours"
-                )
+                ),
+                prevShiftData = emptyList()
             )
         }
 
@@ -108,7 +128,10 @@ class DashboardScreenTest {
                     "Fri" to "1",
                     "Sat" to "2"
                 ),
-                nextShiftData = emptyList()
+                weeklyStats = emptyList(),
+                monthlyStats = emptyList(),
+                nextShiftData = emptyList(),
+                prevShiftData = emptyList()
             )
         }
 
@@ -135,11 +158,14 @@ class DashboardScreenTest {
                 bannerText = "Your Shifts",
                 location = "Berlin, Germany",
                 days = daysList,
+                weeklyStats = emptyList(),
+                monthlyStats = emptyList(),
                 nextShiftData = listOf(
                     "Date" to "2024-11-28",
                     "Time" to "9:00 AM",
                     "Hours" to "8 hours"
-                )
+                ),
+                prevShiftData = emptyList()
             )
         }
 
@@ -169,11 +195,14 @@ class DashboardScreenTest {
                     "Fri" to "1",
                     "Sat" to "2"
                 ),
+                weeklyStats = emptyList(),
+                monthlyStats = emptyList(),
                 nextShiftData = listOf(
                     "Date" to "2024-11-28",
                     "Time" to "9:00 AM",
                     "Hours" to "8 hours"
-                )
+                ),
+                prevShiftData = emptyList()
             )
         }
 

@@ -32,11 +32,26 @@ fun NavigationHost(navController: NavHostController, modifier: Modifier = Modifi
                     "Fri" to "1",
                     "Sat" to "2"
                 ),
+                weeklyStats = listOf(
+                    "Total Shifts" to "5 Shifts",
+                    "Hours Worked" to "9 Hours",
+                    "Weekly Quota" to "+8 Hours"
+                ),
+                monthlyStats = listOf(
+                    "Total Shifts" to "5 Shifts",
+                    "Hours Worked" to "9 Hours",
+                    "Remaining Hours" to "8 Hours"
+                ),
                 nextShiftData = listOf(
                     "Date" to "Dec 2, Sat",
                     "Time" to "9:00 AM\n5:00 PM",
-                    "Hours" to "8 Hours"
-                )
+                    "Total Hours" to "8 Hours"
+                ),
+                prevShiftData = listOf(
+                    "Date" to "Dec 2, Sat",
+                    "Time" to "9:00 AM\n5:00 PM",
+                    "Total Hours" to "8 Hours"
+                ),
             )
         }
 

@@ -23,7 +23,7 @@ fun DashboardRowContent(
 
         Row(
             modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.spacedBy(8.dp)
+            horizontalArrangement = Arrangement.spacedBy(5.dp)
         ) {
             content.forEachIndexed { index, (cardTitle, cardContent) ->
                 val backgroundColor = if (index % 2 == 0) {
@@ -35,7 +35,7 @@ fun DashboardRowContent(
                     title = cardTitle,
                     content = cardContent,
                     backgroundColor = backgroundColor,
-                    modifier = Modifier.weight(1f)
+                    modifier = Modifier.weight(1f).size(80.dp)
                 )
             }
         }

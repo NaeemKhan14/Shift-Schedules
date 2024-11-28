@@ -23,7 +23,10 @@ fun DashboardScreen(
     bannerText: String,
     location: String,
     days: List<Pair<String, String>>,
-    nextShiftData: List<Pair<String, String>>
+    weeklyStats: List<Pair<String, String>>,
+    monthlyStats: List<Pair<String, String>>,
+    nextShiftData: List<Pair<String, String>>,
+    prevShiftData: List<Pair<String, String>>,
 ) {
     Surface(
         modifier = Modifier.fillMaxSize(),
@@ -42,8 +45,20 @@ fun DashboardScreen(
             )
             DaysOfWeekSection(days = days)
             DashboardRowContent(
+                title = "This Week's Stats",
+                content = weeklyStats
+            )
+            DashboardRowContent(
+                title = "This Month's Stats",
+                content = monthlyStats
+            )
+            DashboardRowContent(
                 title = "Next Shift",
                 content = nextShiftData
+            )
+            DashboardRowContent(
+                title = "Previous Shift",
+                content = prevShiftData
             )
         }
     }
