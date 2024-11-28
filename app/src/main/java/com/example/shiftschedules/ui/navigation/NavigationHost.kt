@@ -32,9 +32,11 @@ fun NavigationHost(navController: NavHostController, modifier: Modifier = Modifi
                     "Fri" to "1",
                     "Sat" to "2"
                 ),
-                nextShiftDate = "Dec 2, Sat",
-                nextShiftTime = "9:00 AM\n5:00 PM",
-                nextShiftHours = "8 Hours"
+                nextShiftData = listOf(
+                    "Date" to "Dec 2, Sat",
+                    "Time" to "9:00 AM\n5:00 PM",
+                    "Hours" to "8 Hours"
+                )
             )
         }
 

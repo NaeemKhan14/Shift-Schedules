@@ -19,10 +19,20 @@ class DashboardScreenTest {
             DashboardScreen(
                 bannerText = "Your Shifts",
                 location = "Berlin, Germany",
-                days = listOf("Monday" to "8:00 AM - 5:00 PM"),
-                nextShiftDate = "2024-11-28",
-                nextShiftTime = "9:00 AM",
-                nextShiftHours = "8 hours"
+                days = listOf(
+                    "Sun" to "26",
+                    "Mon" to "27",
+                    "Tue" to "28",
+                    "Wed" to "29",
+                    "Thu" to "30",
+                    "Fri" to "1",
+                    "Sat" to "2"
+                ),
+                nextShiftData = listOf(
+                    "Date" to "2024-11-28",
+                    "Time" to "9:00 AM",
+                    "Hours" to "8 hours"
+                )
             )
         }
 
@@ -39,9 +49,11 @@ class DashboardScreenTest {
                 bannerText = "Your Shifts",
                 location = "Berlin, Germany",
                 days = emptyList(),
-                nextShiftDate = "2024-11-28",
-                nextShiftTime = "9:00 AM",
-                nextShiftHours = "8 hours"
+                nextShiftData = listOf(
+                    "Date" to "2024-11-28",
+                    "Time" to "9:00 AM",
+                    "Hours" to "8 hours"
+                )
             )
         }
 
@@ -57,10 +69,20 @@ class DashboardScreenTest {
             DashboardScreen(
                 bannerText = "Your Shifts",
                 location = "Berlin, Germany",
-                days = listOf("Monday" to "8:00 AM - 5:00 PM"),
-                nextShiftDate = "2024-11-28",
-                nextShiftTime = "9:00 AM",
-                nextShiftHours = "8 hours"
+                days = listOf(
+                    "Sun" to "26",
+                    "Mon" to "27",
+                    "Tue" to "28",
+                    "Wed" to "29",
+                    "Thu" to "30",
+                    "Fri" to "1",
+                    "Sat" to "2"
+                ),
+                nextShiftData = listOf(
+                    "Date" to "2024-11-28",
+                    "Time" to "9:00 AM",
+                    "Hours" to "8 hours"
+                )
             )
         }
 
@@ -77,10 +99,16 @@ class DashboardScreenTest {
             DashboardScreen(
                 bannerText = "Your Shifts",
                 location = "Berlin, Germany",
-                days = listOf("Monday" to "8:00 AM - 5:00 PM"),
-                nextShiftDate = "",
-                nextShiftTime = "",
-                nextShiftHours = ""
+                days = listOf(
+                    "Sun" to "26",
+                    "Mon" to "27",
+                    "Tue" to "28",
+                    "Wed" to "29",
+                    "Thu" to "30",
+                    "Fri" to "1",
+                    "Sat" to "2"
+                ),
+                nextShiftData = emptyList()
             )
         }
 
@@ -94,28 +122,34 @@ class DashboardScreenTest {
     fun dashboardScreenHandlesMultipleDays() {
         // Set up the test composable with multiple days
         val daysList = listOf(
-            "Monday" to "8:00 AM - 5:00 PM",
-            "Tuesday" to "9:00 AM - 6:00 PM",
-            "Wednesday" to "8:00 AM - 4:00 PM"
+            "Sun" to "26",
+            "Mon" to "27",
+            "Tue" to "28",
+            "Wed" to "29",
+            "Thu" to "30",
+            "Fri" to "1",
+            "Sat" to "2"
         )
         composeTestRule.setContent {
             DashboardScreen(
                 bannerText = "Your Shifts",
                 location = "Berlin, Germany",
                 days = daysList,
-                nextShiftDate = "2024-11-28",
-                nextShiftTime = "9:00 AM",
-                nextShiftHours = "8 hours"
+                nextShiftData = listOf(
+                    "Date" to "2024-11-28",
+                    "Time" to "9:00 AM",
+                    "Hours" to "8 hours"
+                )
             )
         }
 
         // Assertions
-        composeTestRule.onNodeWithText("Monday").assertIsDisplayed()
-        composeTestRule.onNodeWithText("8:00 AM - 5:00 PM").assertIsDisplayed()
-        composeTestRule.onNodeWithText("Tuesday").assertIsDisplayed()
-        composeTestRule.onNodeWithText("9:00 AM - 6:00 PM").assertIsDisplayed()
-        composeTestRule.onNodeWithText("Wednesday").assertIsDisplayed()
-        composeTestRule.onNodeWithText("8:00 AM - 4:00 PM").assertIsDisplayed()
+        composeTestRule.onNodeWithText("Sun").assertIsDisplayed()
+        composeTestRule.onNodeWithText("26").assertIsDisplayed()
+        composeTestRule.onNodeWithText("Mon").assertIsDisplayed()
+        composeTestRule.onNodeWithText("27").assertIsDisplayed()
+        composeTestRule.onNodeWithText("Tue").assertIsDisplayed()
+        composeTestRule.onNodeWithText("28").assertIsDisplayed()
     }
 
     @Test
@@ -126,10 +160,20 @@ class DashboardScreenTest {
             DashboardScreen(
                 bannerText = longBannerText,
                 location = "Berlin, Germany",
-                days = listOf("Monday" to "8:00 AM - 5:00 PM"),
-                nextShiftDate = "2024-11-28",
-                nextShiftTime = "9:00 AM",
-                nextShiftHours = "8 hours"
+                days = listOf(
+                    "Sun" to "26",
+                    "Mon" to "27",
+                    "Tue" to "28",
+                    "Wed" to "29",
+                    "Thu" to "30",
+                    "Fri" to "1",
+                    "Sat" to "2"
+                ),
+                nextShiftData = listOf(
+                    "Date" to "2024-11-28",
+                    "Time" to "9:00 AM",
+                    "Hours" to "8 hours"
+                )
             )
         }
 
@@ -137,5 +181,4 @@ class DashboardScreenTest {
         composeTestRule.onNodeWithText(longBannerText, substring = true, useUnmergedTree = true).assertIsDisplayed()
         composeTestRule.onNodeWithText("Berlin, Germany").assertIsDisplayed()
     }
-
 }

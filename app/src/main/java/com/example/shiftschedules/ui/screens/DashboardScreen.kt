@@ -1,5 +1,6 @@
 package com.example.shiftschedules.ui.screens
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -9,24 +10,20 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.unit.dp
-import com.example.shiftschedules.ui.components.InfoCard
-import androidx.compose.foundation.Image
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.unit.dp
 import com.example.shiftschedules.R
+import com.example.shiftschedules.ui.components.DashboardRowContent
 
 @Composable
 fun DashboardScreen(
     bannerText: String,
     location: String,
     days: List<Pair<String, String>>,
-    nextShiftDate: String,
-    nextShiftTime: String,
-    nextShiftHours: String
+    nextShiftData: List<Pair<String, String>>
 ) {
     Surface(
         modifier = Modifier.fillMaxSize(),
@@ -44,15 +41,9 @@ fun DashboardScreen(
                 imagePainter = painterResource(id = R.drawable.banner)
             )
             DaysOfWeekSection(days = days)
-            NextShiftSection(
-                date = nextShiftDate,
-                time = nextShiftTime,
-                hours = nextShiftHours,
-                cardColors = listOf(
-                    MaterialTheme.colorScheme.primary,
-                    MaterialTheme.colorScheme.secondary,
-                    MaterialTheme.colorScheme.primary
-                )
+            DashboardRowContent(
+                title = "Next Shift",
+                content = nextShiftData
             )
         }
     }
@@ -98,6 +89,7 @@ fun BannerSection(
         }
     }
 }
+
 @Composable
 fun DaysOfWeekSection(days: List<Pair<String, String>>) {
     Column {
@@ -115,7 +107,8 @@ fun DaysOfWeekSection(days: List<Pair<String, String>>) {
                 DayCard(
                     day = day,
                     date = date,
-                    modifier = Modifier.weight(1f) // Ensures equal width for all cards
+                    modifier = Modifier.weight(1f), // Ensures equal width for all cards
+                    hasShift = false
                 )
             }
         }
@@ -124,11 +117,14 @@ fun DaysOfWeekSection(days: List<Pair<String, String>>) {
 
 
 @Composable
-fun DayCard(day: String, date: String, modifier: Modifier = Modifier) {
+fun DayCard(day: String, date: String, modifier: Modifier = Modifier, hasShift: Boolean) {
+    val backgroundColor =
+        if (hasShift) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.surface;
+
     Column(
         modifier = modifier
             .background(
-                MaterialTheme.colorScheme.surface,
+                color = backgroundColor,
                 shape = MaterialTheme.shapes.small
             )
             .padding(8.dp),
@@ -144,49 +140,5 @@ fun DayCard(day: String, date: String, modifier: Modifier = Modifier) {
             style = MaterialTheme.typography.titleSmall,
             color = MaterialTheme.colorScheme.onSurface
         )
-    }
-}
-
-
-@Composable
-fun NextShiftSection(
-    date: String,
-    time: String,
-    hours: String,
-    cardColors: List<Color>
-) {
-    Column(
-        modifier = Modifier.fillMaxWidth(),
-        verticalArrangement = Arrangement.spacedBy(8.dp)
-    ) {
-        Text(
-            text = "Next Shift",
-            style = MaterialTheme.typography.titleMedium,
-            color = MaterialTheme.colorScheme.onBackground
-        )
-
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.spacedBy(8.dp)
-        ) {
-            InfoCard(
-                title = "Date",
-                content = date,
-                backgroundColor = cardColors[0],
-                modifier = Modifier.weight(1f)
-            )
-            InfoCard(
-                title = "Time",
-                content = time,
-                backgroundColor = cardColors[1],
-                modifier = Modifier.weight(1f)
-            )
-            InfoCard(
-                title = "Hours",
-                content = hours,
-                backgroundColor = cardColors[2],
-                modifier = Modifier.weight(1f)
-            )
-        }
     }
 }
