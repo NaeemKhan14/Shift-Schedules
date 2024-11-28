@@ -39,9 +39,9 @@ fun DashboardScreen(
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
             BannerSection(
-                bannerText = "Your Shifts",
-                location = "Berlin, Germany",
-                imagePainter = painterResource(id = R.drawable.banner) // Replace with your image file name
+                bannerText = bannerText,
+                location = location,
+                imagePainter = painterResource(id = R.drawable.banner)
             )
             DaysOfWeekSection(days = days)
             NextShiftSection(
@@ -62,7 +62,7 @@ fun DashboardScreen(
 fun BannerSection(
     bannerText: String,
     location: String,
-    imagePainter: Painter // Pass the image painter as an argument
+    imagePainter: Painter
 ) {
     Box(
         modifier = Modifier

@@ -21,7 +21,7 @@ fun NavigationHost(navController: NavHostController, modifier: Modifier = Modifi
         // Dashboard/Home Screen
         composable("dashboard") {
             DashboardScreen(
-                bannerText = "Starbucks Berlin",
+                bannerText = "Starbucks",
                 location = "Berlin, Germany",
                 days = listOf(
                     "Sun" to "26",
