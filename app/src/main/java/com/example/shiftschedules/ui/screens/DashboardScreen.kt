@@ -17,6 +17,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.example.shiftschedules.R
 import com.example.shiftschedules.ui.components.DashboardRowContent
+import com.example.shiftschedules.utils.ScrollableScreen
 
 @Composable
 fun DashboardScreen(
@@ -32,12 +33,7 @@ fun DashboardScreen(
         modifier = Modifier.fillMaxSize(),
         color = MaterialTheme.colorScheme.background
     ) {
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(16.dp),
-            verticalArrangement = Arrangement.spacedBy(16.dp)
-        ) {
+        ScrollableScreen {
             BannerSection(
                 bannerText = bannerText,
                 location = location,
