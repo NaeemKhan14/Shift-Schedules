@@ -5,7 +5,6 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.example.shiftschedules.ui.screens.CameraScreen
 import com.example.shiftschedules.ui.screens.DashboardScreen
 import com.example.shiftschedules.ui.screens.HistoryScreen
 import com.example.shiftschedules.ui.screens.SettingsScreen
@@ -58,14 +57,12 @@ fun NavigationHost(navController: NavHostController, modifier: Modifier = Modifi
         // History Screen
         composable("history") { HistoryScreen() }
 
-        // Camera Screen
-        composable("camera") { CameraScreen() }
-
         // Statistics Screen
         composable("statistics") { StatisticsScreen() }
 
         // Settings Screen
         composable("settings") { SettingsScreen() }
+
+        // Note: Camera screen is removed from here to ensure clicking the Camera tab does nothing
     }
 }
-
