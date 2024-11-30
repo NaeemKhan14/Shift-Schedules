@@ -87,5 +87,21 @@ class SettingsScreenTest {
         composeTestRule.onNodeWithText("Enter offset").assertDoesNotExist()
     }
 
+    @Test
+    fun testHoursPerWeekField_initialValueIsZero() {
+        composeTestRule.setContent {
+            SettingsRowWithLabel(
+                label = "Hours Per Week",
+                tooltip = "Total allowed working hours per week",
+                icon = android.R.drawable.ic_dialog_info
+            ) {
+                EditableFieldWithEditIcon(hint = "0", isIntOnly = true)
+            }
+        }
+
+        // Verify the initial value is "0"
+        composeTestRule.onNodeWithText("0").assertIsDisplayed()
+    }
+
 
 }

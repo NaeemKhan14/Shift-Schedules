@@ -16,6 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Popup
 import com.example.shiftschedules.R
@@ -43,7 +44,7 @@ fun SettingsScreen() {
                 tooltip = "Total allowed working hours per week",
                 icon = R.drawable.hourglass_empty
             ) {
-                EditableFieldWithEditIcon(hint = "Enter hours")
+                EditableFieldWithEditIcon(hint = "0", isIntOnly = true)
             }
             SettingsRowWithLabel(
                 label = "Store Location",
@@ -124,14 +125,18 @@ fun SettingsRowWithLabel(
 
 
 @Composable
-fun EditableFieldWithEditIcon(hint: String) {
+fun EditableFieldWithEditIcon(hint: String, isIntOnly: Boolean = false) {
     var isEditing by remember { mutableStateOf(false) }
-    var text by remember { mutableStateOf(hint) }
+    var text by remember { mutableStateOf(if (isIntOnly) "0" else hint) } // Default to "0" for integers
 
     if (isEditing) {
         TextField(
             value = text,
-            onValueChange = { text = it },
+            onValueChange = { newValue ->
+                if (!isIntOnly || newValue.all { it.isDigit() }) {
+                    text = newValue
+                }
+            },
             placeholder = { Text(hint) },
             modifier = Modifier
                 .fillMaxWidth()
@@ -145,7 +150,10 @@ fun EditableFieldWithEditIcon(hint: String) {
                 unfocusedIndicatorColor = Color.Transparent
             ),
             keyboardActions = KeyboardActions(onDone = { isEditing = false }),
-            keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Done)
+            keyboardOptions = KeyboardOptions.Default.copy(
+                imeAction = ImeAction.Done,
+                keyboardType = if (isIntOnly) KeyboardType.Number else KeyboardType.Text
+            )
         )
     } else {
         Row(
@@ -173,6 +181,7 @@ fun EditableFieldWithEditIcon(hint: String) {
         }
     }
 }
+
 
 
 @Composable
@@ -296,27 +305,9 @@ fun AlarmSwitchField() {
                 onDismissRequest = { showTooltip = false }
             )
 
-            // Editable/Static Field
             if (isToggleOn) {
                 if (isEditing) {
-                    TextField(
-                        value = text,
-                        onValueChange = { text = it },
-                        placeholder = { Text("Enter offset") },
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(8.dp),
-                        singleLine = true,
-                        textStyle = MaterialTheme.typography.bodyLarge,
-                        colors = TextFieldDefaults.colors(
-                            focusedContainerColor = MaterialTheme.colorScheme.surface,
-                            unfocusedContainerColor = MaterialTheme.colorScheme.surface,
-                            focusedIndicatorColor = MaterialTheme.colorScheme.primary,
-                            unfocusedIndicatorColor = Color.Transparent
-                        ),
-                        keyboardActions = KeyboardActions(onDone = { isEditing = false }),
-                        keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Done)
-                    )
+                    EditableFieldWithEditIcon(hint = "0", isIntOnly = true)
                 } else {
                     Row(
                         verticalAlignment = Alignment.CenterVertically,
@@ -329,7 +320,7 @@ fun AlarmSwitchField() {
                             text = text,
                             style = MaterialTheme.typography.bodyLarge,
                             modifier = Modifier
-                                .weight(1f) // Use remaining space
+                                .weight(1f)
                                 .padding(end = 8.dp),
                             color = MaterialTheme.colorScheme.onSurface
                         )
