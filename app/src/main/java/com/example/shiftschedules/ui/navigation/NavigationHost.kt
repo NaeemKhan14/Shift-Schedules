@@ -62,6 +62,6 @@ fun NavigationHost(navController: NavHostController, modifier: Modifier = Modifi
 
         // Settings Screen
         composable("settings") { SettingsScreen() }
-        
+
     }
 }
