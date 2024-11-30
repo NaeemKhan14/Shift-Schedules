@@ -62,7 +62,6 @@ fun NavigationHost(navController: NavHostController, modifier: Modifier = Modifi
 
         // Settings Screen
         composable("settings") { SettingsScreen() }
-
-        // Note: Camera screen is removed from here to ensure clicking the Camera tab does nothing
+        
     }
 }
