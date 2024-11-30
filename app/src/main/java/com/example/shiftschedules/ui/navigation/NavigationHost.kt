@@ -6,7 +6,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.shiftschedules.ui.screens.DashboardScreen
-import com.example.shiftschedules.ui.screens.HistoryScreen
+import com.example.shiftschedules.ui.screens.ShiftsScreen
 import com.example.shiftschedules.ui.screens.SettingsScreen
 import com.example.shiftschedules.ui.screens.StatisticsScreen
 
@@ -55,7 +55,7 @@ fun NavigationHost(navController: NavHostController, modifier: Modifier = Modifi
         }
 
         // History Screen
-        composable("history") { HistoryScreen() }
+        composable("shifts") { ShiftsScreen() }
 
         // Statistics Screen
         composable("statistics") { StatisticsScreen() }

@@ -24,7 +24,7 @@ fun BottomNavBar(navController: NavHostController) {
     // Define the items in the bottom navigation
     val items = listOf(
         BottomNavItem("Home", R.drawable.ic_home, "dashboard"),
-        BottomNavItem("History", R.drawable.ic_history, "history"),
+        BottomNavItem("Shifts", R.drawable.calendar_month, "shifts"),
         BottomNavItem("Camera", R.drawable.ic_camera, "camera"),
         BottomNavItem("Statistics", R.drawable.ic_statistics, "statistics"),
         BottomNavItem("Settings", R.drawable.ic_settings, "settings")
