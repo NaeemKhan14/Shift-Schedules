@@ -123,6 +123,16 @@ fun CalendarGrid(
     val bottomBarHeight = 56.dp
     val calendarHeight = Modifier.fillMaxHeight().padding(bottom = bottomBarHeight)
 
+    val dayNames = listOf(
+        stringResource(R.string.day_tue),
+        stringResource(R.string.day_wed),
+        stringResource(R.string.day_thu),
+        stringResource(R.string.day_fri),
+        stringResource(R.string.day_sat),
+        stringResource(R.string.day_sun),
+        stringResource(R.string.day_mon),
+    )
+
     Column(
         modifier = calendarHeight,
         verticalArrangement = Arrangement.SpaceBetween
@@ -131,7 +141,7 @@ fun CalendarGrid(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
-            listOf("Tue", "Wed", "Thu", "Fri", "Sat", "Sun", "Mon").forEach { day ->
+            dayNames.forEach { day ->
                 Text(
                     text = day,
                     modifier = Modifier.weight(1f),

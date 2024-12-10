@@ -28,13 +28,13 @@ fun NavigationHost(
                 bannerText = stringResource(R.string.banner_text),
                 location = stringResource(R.string.location),
                 days = listOf(
-                    stringResource(R.string.day_sun) to "26",
-                    stringResource(R.string.day_mon) to "27",
                     stringResource(R.string.day_tue) to "28",
                     stringResource(R.string.day_wed) to "29",
                     stringResource(R.string.day_thu) to "30",
                     stringResource(R.string.day_fri) to "1",
-                    stringResource(R.string.day_sat) to "2"
+                    stringResource(R.string.day_sat) to "2",
+                    stringResource(R.string.day_sun) to "3",
+                    stringResource(R.string.day_mon) to "4",
                 ),
                 weeklyStats = listOf(
                     stringResource(R.string.total_shifts) to "5 Shifts",
