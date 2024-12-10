@@ -18,7 +18,8 @@ fun DashboardRowContent(
         Text(
             text = title,
             style = MaterialTheme.typography.titleMedium,
-            color = MaterialTheme.colorScheme.onBackground
+            color = MaterialTheme.colorScheme.onBackground,
+            modifier = Modifier.padding(horizontal = 8.dp)
         )
 
         Row(
@@ -35,9 +36,12 @@ fun DashboardRowContent(
                     title = cardTitle,
                     content = cardContent,
                     backgroundColor = backgroundColor,
-                    modifier = Modifier.weight(1f).size(80.dp)
+                    modifier = Modifier
+                        .weight(1f)
+                        .padding(4.dp)
                 )
             }
         }
     }
 }
+

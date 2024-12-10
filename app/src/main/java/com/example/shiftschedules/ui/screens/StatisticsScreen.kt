@@ -37,12 +37,10 @@ fun StatisticsScreen() {
             MetricsSection()
         }
     }
-
 }
 
 @Composable
 fun GraphSection(data: List<Point>) {
-    // Set up axis data
     val xAxisData = AxisData.Builder()
         .steps(data.size - 1)
         .axisLabelAngle(-50f)
@@ -63,7 +61,6 @@ fun GraphSection(data: List<Point>) {
         .axisLabelColor(Color(0xFFD3D3D3))
         .build()
 
-    // Set up line chart data
     val lineChartData = LineChartData(
         linePlotData = LinePlotData(
             lines = listOf(
@@ -87,21 +84,22 @@ fun GraphSection(data: List<Point>) {
         backgroundColor = Color.Transparent
     )
 
-    // Display the line chart
     Card(
         modifier = Modifier
-            .height(300.dp),
+            .height(300.dp), // Fixed height retained for visual consistency
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primaryContainer)
     ) {
         Column {
             Text(
                 text = "Hours Worked This Year",
                 color = Color(0xFFD3D3D3),
-                modifier = Modifier.padding(10.dp)
+                modifier = Modifier.padding(10.dp),
+                maxLines = 1, // Prevents overflow
+                overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis
             )
             LineChart(
                 modifier = Modifier
-                    .height(300.dp),
+                    .height(300.dp), // Fixed height retained for consistent design
                 lineChartData = lineChartData
             )
         }
@@ -137,11 +135,18 @@ fun MetricCard(title: String, value: String) {
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Text(text = title, style = MaterialTheme.typography.bodyMedium)
+            Text(
+                text = title,
+                style = MaterialTheme.typography.bodyMedium,
+                maxLines = 1, // Prevent overflow for long titles
+                overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis
+            )
             Text(
                 text = value,
                 style = MaterialTheme.typography.bodyMedium,
-                color = MaterialTheme.colorScheme.primary
+                color = MaterialTheme.colorScheme.primary,
+                maxLines = 1, // Prevent overflow for long values
+                overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis
             )
         }
     }

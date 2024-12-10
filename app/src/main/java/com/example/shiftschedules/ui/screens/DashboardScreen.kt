@@ -69,19 +69,16 @@ fun BannerSection(
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .height(150.dp),
+            .height(150.dp) // Keep fixed height for consistent design
     ) {
-        // Background Image
         Image(
             painter = imagePainter,
-            contentDescription = null, // Decorative image, no need for accessibility
+            contentDescription = null,
             modifier = Modifier
                 .fillMaxSize()
-                .clip(RoundedCornerShape(12.dp)), // Rounded corners for the image
-            contentScale = ContentScale.Crop // Ensure the image scales properly
+                .clip(RoundedCornerShape(12.dp)),
+            contentScale = ContentScale.Crop
         )
-
-        // Text Overlay
         Column(
             modifier = Modifier
                 .padding(16.dp)
@@ -90,12 +87,16 @@ fun BannerSection(
             Text(
                 text = bannerText,
                 style = MaterialTheme.typography.headlineMedium,
-                color = MaterialTheme.colorScheme.onPrimary
+                color = MaterialTheme.colorScheme.onPrimary,
+                maxLines = 1, // Prevents excessive height for long text
+                overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis
             )
             Text(
                 text = location,
                 style = MaterialTheme.typography.bodyMedium,
-                color = MaterialTheme.colorScheme.onPrimary
+                color = MaterialTheme.colorScheme.onPrimary,
+                maxLines = 1,
+                overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis
             )
         }
     }
@@ -118,7 +119,7 @@ fun DaysOfWeekSection(days: List<Pair<String, String>>) {
                 DayCard(
                     day = day,
                     date = date,
-                    modifier = Modifier.weight(1f), // Ensures equal width for all cards
+                    modifier = Modifier.weight(1f),
                     hasShift = false
                 )
             }
@@ -126,11 +127,9 @@ fun DaysOfWeekSection(days: List<Pair<String, String>>) {
     }
 }
 
-
 @Composable
 fun DayCard(day: String, date: String, modifier: Modifier = Modifier, hasShift: Boolean) {
-    val backgroundColor =
-        if (hasShift) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.surface;
+    val backgroundColor = if (hasShift) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.surface
 
     Column(
         modifier = modifier
@@ -144,12 +143,16 @@ fun DayCard(day: String, date: String, modifier: Modifier = Modifier, hasShift: 
         Text(
             text = day,
             style = MaterialTheme.typography.bodySmall,
-            color = MaterialTheme.colorScheme.onSurface
+            color = MaterialTheme.colorScheme.onSurface,
+            maxLines = 1,
+            overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis
         )
         Text(
             text = date,
             style = MaterialTheme.typography.titleSmall,
-            color = MaterialTheme.colorScheme.onSurface
+            color = MaterialTheme.colorScheme.onSurface,
+            maxLines = 1,
+            overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis
         )
     }
 }

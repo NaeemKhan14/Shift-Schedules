@@ -17,11 +17,10 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.example.shiftschedules.R
 import com.example.shiftschedules.domain.models.BottomNavItem
-import com.example.shiftschedules.domain.models.NoRippleInteractionSource
+import com.example.shiftschedules.utils.NoRippleInteractionSource
 
 @Composable
 fun BottomNavBar(navController: NavHostController) {
-    // Define the items in the bottom navigation
     val items = listOf(
         BottomNavItem("Home", R.drawable.ic_home, "dashboard"),
         BottomNavItem("Shifts", R.drawable.calendar_month, "shifts"),
@@ -30,34 +29,21 @@ fun BottomNavBar(navController: NavHostController) {
         BottomNavItem("Settings", R.drawable.ic_settings, "settings")
     )
 
-    // Get the current route from the NavController
     val currentBackStackEntry by navController.currentBackStackEntryAsState()
     val currentRoute = currentBackStackEntry?.destination?.route
 
-    // State for managing dropdown visibility for the Camera item
-    // Launcher for opening the camera to take a picture
-    val cameraLauncher = rememberLauncherForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-        // Handle the captured image here
-    }
+    val cameraLauncher = rememberLauncherForActivityResult(ActivityResultContracts.StartActivityForResult()) { }
     var isCameraMenuExpanded by remember { mutableStateOf(false) }
 
-    // Launcher for picking an image from the gallery
-    val galleryLauncher = rememberLauncherForActivityResult(ActivityResultContracts.GetContent()) { uri ->
-        // Handle the image URI here
-    }
-
-    // Launcher for picking a PDF file
-    val pdfLauncher = rememberLauncherForActivityResult(ActivityResultContracts.GetContent()) { uri ->
-        // Handle the PDF URI here
-    }
+    val galleryLauncher = rememberLauncherForActivityResult(ActivityResultContracts.GetContent()) { }
+    val pdfLauncher = rememberLauncherForActivityResult(ActivityResultContracts.GetContent()) { }
 
     NavigationBar(
-        containerColor = MaterialTheme.colorScheme.background, // Global background color
-        contentColor = MaterialTheme.colorScheme.primary // Default content color
+        containerColor = MaterialTheme.colorScheme.background,
+        contentColor = MaterialTheme.colorScheme.primary
     ) {
         items.forEach { item ->
             if (item.label == "Camera") {
-                // Special handling for Camera item to show a dropdown menu
                 NavigationBarItem(
                     selected = false,
                     onClick = { isCameraMenuExpanded = true },
@@ -70,50 +56,42 @@ fun BottomNavBar(navController: NavHostController) {
                     label = {
                         Text(
                             text = item.label,
-                            color = if (currentRoute == item.route) Color.White else MaterialTheme.colorScheme.primary
+                            color = if (currentRoute == item.route) Color.White else MaterialTheme.colorScheme.primary,
+                            maxLines = 1, // Prevent excessive height due to long text
+                            overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis
                         )
                     },
                     colors = NavigationBarItemDefaults.colors(
-                        selectedIconColor = Color.White, // White for active tab icons
-                        unselectedIconColor = MaterialTheme.colorScheme.primary, // Purple for inactive icons
-                        indicatorColor = Color.Transparent // Remove overlay highlight
+                        selectedIconColor = Color.White,
+                        unselectedIconColor = MaterialTheme.colorScheme.primary,
+                        indicatorColor = Color.Transparent
                     ),
                     interactionSource = NoRippleInteractionSource(),
                 )
 
-                // Dropdown menu for the Camera option
-                Box (
-                    modifier = Modifier.offset(x = (-100).dp)
-                ) {
+                Box(modifier = Modifier.offset(x = (-100).dp)) {
                     DropdownMenu(
                         expanded = isCameraMenuExpanded,
-                        onDismissRequest = { isCameraMenuExpanded = false },
+                        onDismissRequest = { isCameraMenuExpanded = false }
                     ) {
                         DropdownMenuItem(
-                            text = { Text("Upload Image") },
+                            text = { Text("Upload Image", maxLines = 1, overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis) },
                             onClick = {
-                                isCameraMenuExpanded = false
-                                // Launch gallery picker
                                 isCameraMenuExpanded = false
                                 galleryLauncher.launch("image/*")
                             }
                         )
-
                         DropdownMenuItem(
-                            text = { Text("Upload PDF") },
+                            text = { Text("Upload PDF", maxLines = 1, overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis) },
                             onClick = {
-                                isCameraMenuExpanded = false
-                                // Launch file explorer for PDF
                                 isCameraMenuExpanded = false
                                 pdfLauncher.launch("application/pdf")
                             }
                         )
-
                         DropdownMenuItem(
-                            text = { Text("Take Picture") },
+                            text = { Text("Take Picture", maxLines = 1, overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis) },
                             onClick = {
                                 isCameraMenuExpanded = false
-                                // Launch camera to take a picture
                                 val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
                                 cameraLauncher.launch(cameraIntent)
                             }
@@ -121,7 +99,6 @@ fun BottomNavBar(navController: NavHostController) {
                     }
                 }
             } else {
-                // Regular NavigationBarItem for other items
                 NavigationBarItem(
                     selected = currentRoute == item.route,
                     onClick = {
@@ -144,13 +121,15 @@ fun BottomNavBar(navController: NavHostController) {
                     label = {
                         Text(
                             text = item.label,
-                            color = if (currentRoute == item.route) Color.White else MaterialTheme.colorScheme.primary
+                            color = if (currentRoute == item.route) Color.White else MaterialTheme.colorScheme.primary,
+                            maxLines = 1, // Prevent excessive height due to long text
+                            overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis
                         )
                     },
                     colors = NavigationBarItemDefaults.colors(
-                        selectedIconColor = Color.White, // White for active tab icons
-                        unselectedIconColor = MaterialTheme.colorScheme.primary, // Purple for inactive icons
-                        indicatorColor = Color.Transparent // Remove overlay highlight
+                        selectedIconColor = Color.White,
+                        unselectedIconColor = MaterialTheme.colorScheme.primary,
+                        indicatorColor = Color.Transparent
                     ),
                     interactionSource = NoRippleInteractionSource()
                 )

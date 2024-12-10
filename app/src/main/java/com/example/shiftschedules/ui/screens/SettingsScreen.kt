@@ -72,7 +72,7 @@ fun SettingsRowWithLabel(
     icon: Int,
     content: @Composable () -> Unit
 ) {
-    var showTooltip by remember { mutableStateOf(false) } // State to control tooltip visibility
+    var showTooltip by remember { mutableStateOf(false) }
 
     Card(
         modifier = Modifier
@@ -100,7 +100,12 @@ fun SettingsRowWithLabel(
                         modifier = Modifier.size(24.dp)
                     )
                     Spacer(modifier = Modifier.width(8.dp))
-                    Text(text = label, style = MaterialTheme.typography.bodyLarge)
+                    Text(
+                        text = label,
+                        style = MaterialTheme.typography.bodyLarge,
+                        maxLines = 1, // Prevent overflow
+                        overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis
+                    )
                     Spacer(modifier = Modifier.width(8.dp))
                     Icon(
                         imageVector = Icons.Default.Info,
@@ -116,18 +121,15 @@ fun SettingsRowWithLabel(
                     )
                 }
             }
-
-            // Editable or static content
             content()
         }
     }
 }
 
-
 @Composable
 fun EditableFieldWithEditIcon(hint: String, isIntOnly: Boolean = false) {
     var isEditing by remember { mutableStateOf(false) }
-    var text by remember { mutableStateOf(if (isIntOnly) "0" else hint) } // Default to "0" for integers
+    var text by remember { mutableStateOf(if (isIntOnly) "0" else hint) }
 
     if (isEditing) {
         TextField(
@@ -167,9 +169,11 @@ fun EditableFieldWithEditIcon(hint: String, isIntOnly: Boolean = false) {
                 text = text,
                 style = MaterialTheme.typography.bodyLarge,
                 modifier = Modifier
-                    .weight(1f) // Use remaining space
+                    .weight(1f)
                     .padding(end = 8.dp),
-                color = MaterialTheme.colorScheme.onSurface
+                color = MaterialTheme.colorScheme.onSurface,
+                maxLines = 1,
+                overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis
             )
             Icon(
                 imageVector = Icons.Default.Edit,
@@ -181,8 +185,6 @@ fun EditableFieldWithEditIcon(hint: String, isIntOnly: Boolean = false) {
         }
     }
 }
-
-
 
 @Composable
 fun Tooltip(
@@ -198,16 +200,19 @@ fun Tooltip(
         ) {
             Box(
                 modifier = Modifier
-                    .padding(bottom = 8.dp) // Adjust spacing above the icon
+                    .padding(bottom = 8.dp)
                     .background(MaterialTheme.colorScheme.primary, RoundedCornerShape(8.dp))
                     .padding(8.dp)
-                    .then(modifier),
-                contentAlignment = Alignment.TopCenter // Aligns the tooltip above the icon
+                    .then(modifier)
+                    .widthIn(max = 200.dp), // Limit tooltip width
+                contentAlignment = Alignment.TopCenter
             ) {
                 Text(
                     text = tooltipText,
                     style = MaterialTheme.typography.bodySmall,
-                    color = MaterialTheme.colorScheme.onSurface
+                    color = MaterialTheme.colorScheme.onSurface,
+                    maxLines = 3,
+                    overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis
                 )
             }
         }

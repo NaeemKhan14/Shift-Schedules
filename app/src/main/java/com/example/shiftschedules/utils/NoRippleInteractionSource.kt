@@ -1,4 +1,4 @@
-package com.example.shiftschedules.domain.models
+package com.example.shiftschedules.utils
 
 import androidx.compose.foundation.interaction.Interaction
 import androidx.compose.foundation.interaction.MutableInteractionSource

@@ -13,6 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.example.shiftschedules.R
 import java.time.LocalDate
@@ -53,7 +54,9 @@ fun ShiftsScreen() {
                 text = "${currentMonth.month.getDisplayName(TextStyle.FULL, Locale.getDefault())} ${currentMonth.year}",
                 style = MaterialTheme.typography.titleMedium,
                 textAlign = TextAlign.Center,
-                modifier = Modifier.weight(1f)
+                modifier = Modifier.weight(1f),
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis
             )
             IconButton(onClick = {
                 if (currentMonth.isBefore(YearMonth.now().plusMonths(1))) {
@@ -112,18 +115,17 @@ fun CalendarGrid(
     onDayClick: (LocalDate) -> Unit
 ) {
     val daysInMonth = yearMonth.lengthOfMonth()
-    val firstDayOfWeek = (yearMonth.atDay(1).dayOfWeek.value + 5) % 7 // Shift start to Tuesday
+    val firstDayOfWeek = (yearMonth.atDay(1).dayOfWeek.value + 5) % 7
     val totalCells = firstDayOfWeek + daysInMonth
     val rows = (totalCells / 7) + if (totalCells % 7 != 0) 1 else 0
 
-    val bottomBarHeight = 56.dp // Estimated height of the bottom navigation bar
+    val bottomBarHeight = 56.dp
     val calendarHeight = Modifier.fillMaxHeight().padding(bottom = bottomBarHeight)
 
     Column(
         modifier = calendarHeight,
-        verticalArrangement = Arrangement.SpaceBetween // Distribute rows evenly
+        verticalArrangement = Arrangement.SpaceBetween
     ) {
-        // Weekday Labels starting from Tuesday
         Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceBetween
@@ -133,12 +135,13 @@ fun CalendarGrid(
                     text = day,
                     modifier = Modifier.weight(1f),
                     textAlign = TextAlign.Center,
-                    style = MaterialTheme.typography.bodySmall
+                    style = MaterialTheme.typography.bodySmall,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis
                 )
             }
         }
 
-        // Calendar Days
         for (row in 0 until rows) {
             Row(
                 modifier = Modifier.fillMaxWidth(),
@@ -165,8 +168,6 @@ fun CalendarGrid(
         }
     }
 }
-
-
 
 @Composable
 fun DayCell(
@@ -198,15 +199,18 @@ fun DayCell(
         if (hasShift) {
             shifts.forEach { shift ->
                 Text(
-                    text = shift.replace(" - ", "\n"), // Display in "09:00\n17:00" format
+                    text = shift.replace(" - ", "\n"),
                     style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.onPrimary,
-                    textAlign = TextAlign.Center
+                    textAlign = TextAlign.Center,
+                    maxLines = 2,
+                    overflow = TextOverflow.Ellipsis
                 )
             }
         }
     }
 }
+
 
 @Composable
 fun ShiftDialog(

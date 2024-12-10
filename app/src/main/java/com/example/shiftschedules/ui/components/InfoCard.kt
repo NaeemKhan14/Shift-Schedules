@@ -22,7 +22,8 @@ fun InfoCard(
         shape = MaterialTheme.shapes.medium,
         colors = CardDefaults.cardColors(containerColor = backgroundColor),
         modifier = modifier
-            .height(100.dp)
+            .height(100.dp) // Restore the fixed height for uniformity
+            .width(100.dp) // Add a fixed width for consistency
     ) {
         Column(
             modifier = Modifier
@@ -36,7 +37,9 @@ fun InfoCard(
                 style = MaterialTheme.typography.titleSmall,
                 color = MaterialTheme.colorScheme.onSurface,
                 modifier = Modifier
-                    .align(Alignment.CenterHorizontally)
+                    .align(Alignment.CenterHorizontally),
+                maxLines = 1,
+                overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis
             )
             Spacer(modifier = Modifier.height(8.dp))
             Text(
@@ -44,7 +47,9 @@ fun InfoCard(
                 style = MaterialTheme.typography.bodyMedium,
                 color = MaterialTheme.colorScheme.onSurface,
                 modifier = Modifier
-                    .align(Alignment.CenterHorizontally)
+                    .align(Alignment.CenterHorizontally),
+                maxLines = 2, // Keep the content single-line for simplicity
+                overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis
             )
         }
     }
