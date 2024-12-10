@@ -7,6 +7,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
+import com.example.shiftschedules.R
 import androidx.compose.ui.unit.dp
 import co.yml.charts.axis.AxisData
 import co.yml.charts.common.model.Point
@@ -33,7 +35,10 @@ fun StatisticsScreen() {
             )
 
             // Key Metrics Section
-            Text(text = "Key Metrics", style = MaterialTheme.typography.titleMedium)
+            Text(
+                text = stringResource(R.string.key_metrics),
+                style = MaterialTheme.typography.titleMedium
+            )
             MetricsSection()
         }
     }
@@ -41,14 +46,18 @@ fun StatisticsScreen() {
 
 @Composable
 fun GraphSection(data: List<Point>) {
+    var listOfMonths = listOf(
+        stringResource(R.string.blank), stringResource(R.string.jan), stringResource(R.string.feb),
+        stringResource(R.string.mar), stringResource(R.string.apr), stringResource(R.string.may),
+        stringResource(R.string.jun), stringResource(R.string.jul), stringResource(R.string.aug),
+        stringResource(R.string.sep), stringResource(R.string.oct), stringResource(R.string.nov),
+        stringResource(R.string.dec)
+    )
     val xAxisData = AxisData.Builder()
         .steps(data.size - 1)
         .axisLabelAngle(-50f)
         .labelData { i ->
-            val months = listOf(
-                "", "Jan", "Feb", "Mar", "Apr", "May",
-                "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
-            )
+            val months = listOfMonths
             months[i % months.size]
         }
         .axisLabelColor(Color(0xFFD3D3D3))
@@ -85,21 +94,19 @@ fun GraphSection(data: List<Point>) {
     )
 
     Card(
-        modifier = Modifier
-            .height(300.dp), // Fixed height retained for visual consistency
+        modifier = Modifier.height(300.dp),
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primaryContainer)
     ) {
         Column {
             Text(
-                text = "Hours Worked This Year",
+                text = stringResource(R.string.hours_worked_this_year),
                 color = Color(0xFFD3D3D3),
                 modifier = Modifier.padding(10.dp),
-                maxLines = 1, // Prevents overflow
+                maxLines = 1,
                 overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis
             )
             LineChart(
-                modifier = Modifier
-                    .height(300.dp), // Fixed height retained for consistent design
+                modifier = Modifier.height(300.dp),
                 lineChartData = lineChartData
             )
         }
@@ -109,16 +116,17 @@ fun GraphSection(data: List<Point>) {
 @Composable
 fun MetricsSection() {
     Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
-        MetricCard(title = "Total Hours Worked", value = "1,200 hrs")
-        MetricCard(title = "Total Days Worked", value = "150 days")
-        MetricCard(title = "Sick Leaves Taken", value = "5 Days")
-        MetricCard(title = "Longest Shift", value = "12 hrs, Aug 21")
-        MetricCard(title = "Most Worked Day", value = "Mondays")
-        MetricCard(title = "Most Worked Week", value = "Aug 1 - Aug 7")
-        MetricCard(title = "Most Assigned Position", value = "Cashier")
-        MetricCard(title = "Colleague Most Worked With", value = "Naeem")
+        MetricCard(title = stringResource(R.string.total_hours_worked), value = "1,200 hrs")
+        MetricCard(title = stringResource(R.string.total_days_worked), value = "150 days")
+        MetricCard(title = stringResource(R.string.sick_leaves_taken), value = "5 Days")
+        MetricCard(title = stringResource(R.string.longest_shift), value = "12 hrs, Aug 21")
+        MetricCard(title = stringResource(R.string.most_worked_day), value = "Mondays")
+        MetricCard(title = stringResource(R.string.most_worked_week), value = "Aug 1 - Aug 7")
+        MetricCard(title = stringResource(R.string.most_assigned_position), value = "Cashier")
+        MetricCard(title = stringResource(R.string.colleague_most_worked_with), value = "Naeem")
     }
 }
+
 
 @Composable
 fun MetricCard(title: String, value: String) {

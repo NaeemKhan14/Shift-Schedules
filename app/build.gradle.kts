@@ -71,4 +71,5 @@ dependencies {
     // Accompanist for SVG/vector icons if you plan to use external icons
     implementation(libs.accompanist.drawablepainter)
     implementation(libs.ycharts)
+    implementation(libs.datastore.preferences)
 }

@@ -14,6 +14,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.example.shiftschedules.R
 import com.example.shiftschedules.ui.components.DashboardRowContent
@@ -41,19 +42,19 @@ fun DashboardScreen(
             )
             DaysOfWeekSection(days = days)
             DashboardRowContent(
-                title = "This Week's Stats",
+                title = stringResource(R.string.this_week_stats),
                 content = weeklyStats
             )
             DashboardRowContent(
-                title = "This Month's Stats",
+                title = stringResource(R.string.this_month_stats),
                 content = monthlyStats
             )
             DashboardRowContent(
-                title = "Next Shift",
+                title = stringResource(R.string.next_shift),
                 content = nextShiftData
             )
             DashboardRowContent(
-                title = "Previous Shift",
+                title = stringResource(R.string.previous_shift),
                 content = prevShiftData
             )
         }
@@ -69,7 +70,7 @@ fun BannerSection(
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .height(150.dp) // Keep fixed height for consistent design
+            .height(150.dp)
     ) {
         Image(
             painter = imagePainter,
@@ -88,7 +89,7 @@ fun BannerSection(
                 text = bannerText,
                 style = MaterialTheme.typography.headlineMedium,
                 color = MaterialTheme.colorScheme.onPrimary,
-                maxLines = 1, // Prevents excessive height for long text
+                maxLines = 1,
                 overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis
             )
             Text(
@@ -106,7 +107,7 @@ fun BannerSection(
 fun DaysOfWeekSection(days: List<Pair<String, String>>) {
     Column {
         Text(
-            text = "This Week",
+            text = stringResource(R.string.this_week),
             style = MaterialTheme.typography.titleMedium,
             color = MaterialTheme.colorScheme.onBackground,
             modifier = Modifier.padding(vertical = 8.dp)
@@ -156,3 +157,4 @@ fun DayCard(day: String, date: String, modifier: Modifier = Modifier, hasShift: 
         )
     }
 }
+

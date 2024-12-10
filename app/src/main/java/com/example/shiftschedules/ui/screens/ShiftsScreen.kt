@@ -12,6 +12,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -46,7 +47,7 @@ fun ShiftsScreen() {
             IconButton(onClick = { currentMonth = currentMonth.minusMonths(1) }) {
                 Icon(
                     painter = painterResource(id = R.drawable.arrow_back),
-                    contentDescription = "Previous Month",
+                    contentDescription = stringResource(R.string.previous_month),
                     tint = MaterialTheme.colorScheme.primary
                 )
             }
@@ -65,7 +66,7 @@ fun ShiftsScreen() {
             }) {
                 Icon(
                     painter = painterResource(id = R.drawable.arrow_forward),
-                    contentDescription = "Next Month",
+                    contentDescription = stringResource(R.string.next_month),
                     tint = MaterialTheme.colorScheme.primary
                 )
             }
@@ -95,8 +96,7 @@ fun ShiftsScreen() {
                     selectedDate = null
                 },
                 onEditShift = {
-                    // Example edit
-                    shiftsData[date] = listOf("10:00 - 18:00")
+                    shiftsData[date] = listOf("10:00 - 18:00") // Example edit
                     selectedDate = null
                 },
                 onDeleteShift = {
@@ -107,6 +107,7 @@ fun ShiftsScreen() {
         }
     }
 }
+
 
 @Composable
 fun CalendarGrid(
@@ -237,7 +238,7 @@ fun ShiftDialog(
     )
 
     // Add user's shift to the list
-    val employeesWithUser = listOf("You" to shifts.joinToString(", ")) + employees
+    val employeesWithUser = listOf(stringResource(R.string.you) to shifts.joinToString(", ")) + employees
 
     // Sort the list by starting time
     val sortedEmployeesWithUser = employeesWithUser.sortedBy {
@@ -255,7 +256,7 @@ fun ShiftDialog(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Text(
-                        text = "Shift Details",
+                        text = stringResource(R.string.shift_details),
                         style = MaterialTheme.typography.titleMedium
                     )
                     Row {
@@ -263,14 +264,14 @@ fun ShiftDialog(
                             IconButton(onClick = onEditShift) {
                                 Icon(
                                     painter = painterResource(id = R.drawable.edit),
-                                    contentDescription = "Edit Shift",
+                                    contentDescription = stringResource(R.string.edit_shift),
                                     tint = MaterialTheme.colorScheme.primary
                                 )
                             }
                             IconButton(onClick = onDeleteShift) {
                                 Icon(
                                     painter = painterResource(id = R.drawable.delete),
-                                    contentDescription = "Delete Shift",
+                                    contentDescription = stringResource(R.string.delete_shift),
                                     tint = MaterialTheme.colorScheme.error
                                 )
                             }
@@ -278,7 +279,7 @@ fun ShiftDialog(
                         IconButton(onClick = onDismiss) {
                             Icon(
                                 painter = painterResource(id = R.drawable.close),
-                                contentDescription = "Close Dialog",
+                                contentDescription = stringResource(R.string.close_dialog),
                                 tint = MaterialTheme.colorScheme.primary
                             )
                         }
@@ -286,20 +287,20 @@ fun ShiftDialog(
                 }
                 Spacer(modifier = Modifier.height(8.dp))
                 Text(
-                    text = "Date: ${date.dayOfMonth} ${date.month.getDisplayName(TextStyle.FULL, Locale.getDefault())}, ${date.year}",
+                    text = "${stringResource(R.string.date)}: ${date.dayOfMonth} ${date.month.getDisplayName(TextStyle.FULL, Locale.getDefault())}, ${date.year}",
                     style = MaterialTheme.typography.bodyMedium
                 )
                 if (hasShift) {
                     Spacer(modifier = Modifier.height(8.dp))
                     shifts.forEach { shift ->
                         Text(
-                            text = "Your Shift: $shift",
+                            text = "${stringResource(R.string.your_shift)}: $shift",
                             style = MaterialTheme.typography.bodyMedium
                         )
                     }
                     Spacer(modifier = Modifier.height(16.dp))
                     Text(
-                        text = "Other Employees Working:",
+                        text = stringResource(R.string.other_employees_working),
                         style = MaterialTheme.typography.titleSmall
                     )
                     Spacer(modifier = Modifier.height(8.dp))
@@ -309,7 +310,7 @@ fun ShiftDialog(
                             .verticalScroll(rememberScrollState())
                     ) {
                         sortedEmployeesWithUser.forEach { (name, hours) ->
-                            val isUser = name == "You"
+                            val isUser = name == stringResource(R.string.you)
                             ListItem(
                                 colors = ListItemDefaults.colors(
                                     containerColor = if (isUser) MaterialTheme.colorScheme.primaryContainer else MaterialTheme.colorScheme.surfaceVariant
@@ -334,7 +335,7 @@ fun ShiftDialog(
                     }
                 } else {
                     Text(
-                        text = "No shifts scheduled.",
+                        text = stringResource(R.string.no_shifts_scheduled),
                         style = MaterialTheme.typography.bodyMedium
                     )
                 }
@@ -343,14 +344,10 @@ fun ShiftDialog(
         confirmButton = {
             if (!hasShift) {
                 Button(onClick = onAddShift) {
-                    Text("Add Shift")
+                    Text(stringResource(R.string.add_shift))
                 }
-            } else {
-                Spacer(modifier = Modifier.width(0.dp)) // Placeholder to satisfy the non-null requirement
             }
         },
-        dismissButton = {
-            Spacer(modifier = Modifier.width(0.dp)) // Placeholder to satisfy the non-null requirement
-        }
+        dismissButton = {}
     )
 }

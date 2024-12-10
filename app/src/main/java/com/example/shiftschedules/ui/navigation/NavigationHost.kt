@@ -2,6 +2,7 @@ package com.example.shiftschedules.ui.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -9,9 +10,13 @@ import com.example.shiftschedules.ui.screens.DashboardScreen
 import com.example.shiftschedules.ui.screens.ShiftsScreen
 import com.example.shiftschedules.ui.screens.SettingsScreen
 import com.example.shiftschedules.ui.screens.StatisticsScreen
+import com.example.shiftschedules.R
 
 @Composable
-fun NavigationHost(navController: NavHostController, modifier: Modifier = Modifier) {
+fun NavigationHost(
+    navController: NavHostController,
+    modifier: Modifier = Modifier,
+) {
     NavHost(
         navController = navController,
         startDestination = "dashboard",
@@ -20,36 +25,36 @@ fun NavigationHost(navController: NavHostController, modifier: Modifier = Modifi
         // Dashboard/Home Screen
         composable("dashboard") {
             DashboardScreen(
-                bannerText = "Starbucks",
-                location = "Berlin, Germany",
+                bannerText = stringResource(R.string.banner_text),
+                location = stringResource(R.string.location),
                 days = listOf(
-                    "Sun" to "26",
-                    "Mon" to "27",
-                    "Tue" to "28",
-                    "Wed" to "29",
-                    "Thu" to "30",
-                    "Fri" to "1",
-                    "Sat" to "2"
+                    stringResource(R.string.day_sun) to "26",
+                    stringResource(R.string.day_mon) to "27",
+                    stringResource(R.string.day_tue) to "28",
+                    stringResource(R.string.day_wed) to "29",
+                    stringResource(R.string.day_thu) to "30",
+                    stringResource(R.string.day_fri) to "1",
+                    stringResource(R.string.day_sat) to "2"
                 ),
                 weeklyStats = listOf(
-                    "Total Shifts" to "5 Shifts",
-                    "Hours Worked" to "9 Hours",
-                    "Weekly Quota" to "+8 Hours"
+                    stringResource(R.string.total_shifts) to "5 Shifts",
+                    stringResource(R.string.hours_worked) to "9 Hours",
+                    stringResource(R.string.weekly_quota) to "+8 Hours"
                 ),
                 monthlyStats = listOf(
-                    "Total Shifts" to "5 Shifts",
-                    "Hours Worked" to "9 Hours",
-                    "Remaining Hours" to "8 Hours"
+                    stringResource(R.string.total_shifts) to "5 Shifts",
+                    stringResource(R.string.hours_worked) to "9 Hours",
+                    stringResource(R.string.remaining_hours) to "8 Hours"
                 ),
                 nextShiftData = listOf(
-                    "Date" to "Dec 2, Sat",
-                    "Time" to "9:00 AM\n5:00 PM",
-                    "Total Hours" to "8 Hours"
+                    stringResource(R.string.next_shift_date) to "Dec 2, Sat",
+                    stringResource(R.string.next_shift_time) to "9:00 AM\n5:00 PM",
+                    stringResource(R.string.total_hours) to "8 Hours"
                 ),
                 prevShiftData = listOf(
-                    "Date" to "Dec 2, Sat",
-                    "Time" to "9:00 AM\n5:00 PM",
-                    "Total Hours" to "8 Hours"
+                    stringResource(R.string.prev_shift_date) to "Dec 2, Sat",
+                    stringResource(R.string.prev_shift_time) to "9:00 AM\n5:00 PM",
+                    stringResource(R.string.total_hours) to "8 Hours"
                 ),
             )
         }
@@ -62,6 +67,5 @@ fun NavigationHost(navController: NavHostController, modifier: Modifier = Modifi
 
         // Settings Screen
         composable("settings") { SettingsScreen() }
-
     }
 }

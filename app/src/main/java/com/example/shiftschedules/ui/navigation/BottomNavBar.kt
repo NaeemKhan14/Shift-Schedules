@@ -11,7 +11,9 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
@@ -22,11 +24,11 @@ import com.example.shiftschedules.utils.NoRippleInteractionSource
 @Composable
 fun BottomNavBar(navController: NavHostController) {
     val items = listOf(
-        BottomNavItem("Home", R.drawable.ic_home, "dashboard"),
-        BottomNavItem("Shifts", R.drawable.calendar_month, "shifts"),
-        BottomNavItem("Camera", R.drawable.ic_camera, "camera"),
-        BottomNavItem("Statistics", R.drawable.ic_statistics, "statistics"),
-        BottomNavItem("Settings", R.drawable.ic_settings, "settings")
+        BottomNavItem(stringResource(R.string.nav_home), R.drawable.ic_home, "dashboard"),
+        BottomNavItem(stringResource(R.string.nav_shifts), R.drawable.calendar_month, "shifts"),
+        BottomNavItem(stringResource(R.string.nav_camera), R.drawable.ic_camera, "camera"),
+        BottomNavItem(stringResource(R.string.nav_statistics), R.drawable.ic_statistics, "statistics"),
+        BottomNavItem(stringResource(R.string.nav_settings), R.drawable.ic_settings, "settings")
     )
 
     val currentBackStackEntry by navController.currentBackStackEntryAsState()
@@ -58,7 +60,7 @@ fun BottomNavBar(navController: NavHostController) {
                             text = item.label,
                             color = if (currentRoute == item.route) Color.White else MaterialTheme.colorScheme.primary,
                             maxLines = 1, // Prevent excessive height due to long text
-                            overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis
+                            overflow = TextOverflow.Ellipsis
                         )
                     },
                     colors = NavigationBarItemDefaults.colors(
@@ -75,21 +77,21 @@ fun BottomNavBar(navController: NavHostController) {
                         onDismissRequest = { isCameraMenuExpanded = false }
                     ) {
                         DropdownMenuItem(
-                            text = { Text("Upload Image", maxLines = 1, overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis) },
+                            text = { Text(stringResource(R.string.upload_image), maxLines = 1, overflow = TextOverflow.Ellipsis) },
                             onClick = {
                                 isCameraMenuExpanded = false
                                 galleryLauncher.launch("image/*")
                             }
                         )
                         DropdownMenuItem(
-                            text = { Text("Upload PDF", maxLines = 1, overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis) },
+                            text = { Text(stringResource(R.string.upload_pdf), maxLines = 1, overflow = TextOverflow.Ellipsis) },
                             onClick = {
                                 isCameraMenuExpanded = false
                                 pdfLauncher.launch("application/pdf")
                             }
                         )
                         DropdownMenuItem(
-                            text = { Text("Take Picture", maxLines = 1, overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis) },
+                            text = { Text(stringResource(R.string.take_picture), maxLines = 1, overflow = TextOverflow.Ellipsis) },
                             onClick = {
                                 isCameraMenuExpanded = false
                                 val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
@@ -123,7 +125,7 @@ fun BottomNavBar(navController: NavHostController) {
                             text = item.label,
                             color = if (currentRoute == item.route) Color.White else MaterialTheme.colorScheme.primary,
                             maxLines = 1, // Prevent excessive height due to long text
-                            overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis
+                            overflow = TextOverflow.Ellipsis
                         )
                     },
                     colors = NavigationBarItemDefaults.colors(

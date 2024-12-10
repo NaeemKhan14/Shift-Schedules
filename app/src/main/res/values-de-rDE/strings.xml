@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--  App Name  -->
+    <string name="app_name">Schichtpläne</string>
+
+    <!--  Bottom Navbar  -->
+    <!--  Navigation Tags  -->
+    <string name="nav_home">Startseite</string>
+    <string name="nav_shifts">Schichten</string>
+    <string name="nav_camera">Kamera</string>
+    <string name="nav_statistics">Statistiken</string>
+    <string name="nav_settings">Einstellungen</string>
+
+    <!--  Camera Popup Tags  -->
+    <string name="upload_image">Bild hochladen</string>
+    <string name="upload_pdf">PDF hochladen</string>
+    <string name="take_picture">Foto machen</string>
+
+    <!--  Navigation Host  -->
+    <!--  Dashboard Content  -->
+    <string name="banner_text">Starbucks</string>
+    <string name="location">Berlin, Deutschland</string>
+    <string name="total_shifts">Gesamtschichten</string>
+    <string name="hours_worked">Arbeitsstunden</string>
+    <string name="weekly_quota">Wöchentliches Kontingent</string>
+    <string name="remaining_hours">Verbleibende Stunden</string>
+    <string name="next_shift_date">Datum</string>
+    <string name="next_shift_time">Zeit</string>
+    <string name="prev_shift_date">Vorheriges Datum</string>
+    <string name="prev_shift_time">Vorherige Zeit</string>
+    <string name="total_hours">Gesamtstunden</string>
+
+    <!--  DashboardScreen Content  -->
+    <!--  Days of the Week  -->
+    <string name="day_sun">So</string>
+    <string name="day_mon">Mo</string>
+    <string name="day_tue">Di</string>
+    <string name="day_wed">Mi</string>
+    <string name="day_thu">Do</string>
+    <string name="day_fri">Fr</string>
+    <string name="day_sat">Sa</string>
+
+    <!--  Dashboard Content  -->
+    <string name="this_week_stats">Statistik dieser Woche</string>
+    <string name="this_month_stats">Statistik dieses Monats</string>
+    <string name="next_shift">Nächste Schicht</string>
+    <string name="previous_shift">Vorherige Schicht</string>
+    <string name="this_week">Diese Woche</string>
+
+    <!--  Settings Screen Content  -->
+    <!--  Settings Labels  -->
+    <string name="label_name">Name</string>
+    <string name="label_hours_per_week">Stunden pro Woche</string>
+    <string name="label_store_location">Geschäftsstandort</string>
+    <string name="label_language">Sprache</string>
+
+    <!--  Tooltips  -->
+    <string name="tooltip_name">Ihr Name im Schichtplan</string>
+    <string name="tooltip_hours_per_week">Erlaubte Arbeitsstunden pro Woche</string>
+    <string name="tooltip_store_location">Geschäftsstandort (z. B. Pariser Platz)</string>
+    <string name="tooltip_language">Wählen Sie Ihre bevorzugte Sprache aus</string>
+    <string name="tooltip_alarm">Stellen Sie automatisch einen Alarm X Stunden vor der Schicht ein</string>
+
+    <!--  Hints  -->
+    <string name="hint_name">Geben Sie Ihren Namen ein</string>
+    <string name="hint_hours">0</string>
+    <string name="hint_store_location">Geschäftsstandort eingeben</string>
+    <string name="hint_offset">Offset eingeben</string>
+
+    <!--  Language Options  -->
+    <string name="language_english">Englisch</string>
+    <string name="language_german">Deutsch</string>
+
+    <!--  Statistics Screen Content  -->
+    <!--  Statistics Content  -->
+    <string name="key_metrics">Schlüsselmetriken</string>
+    <string name="hours_worked_this_year">Arbeitsstunden dieses Jahr</string>
+    <string name="total_hours_worked">Gesamte Arbeitsstunden</string>
+    <string name="total_days_worked">Gesamte Arbeitstage</string>
+    <string name="sick_leaves_taken">Krankentage</string>
+    <string name="longest_shift">Längste Schicht</string>
+    <string name="most_worked_day">Am meisten gearbeiteter Tag</string>
+    <string name="most_worked_week">Am meisten gearbeitete Woche</string>
+    <string name="most_assigned_position">Am meisten zugewiesene Position</string>
+    <string name="colleague_most_worked_with">Kollege, mit dem am meisten gearbeitet wurde</string>
+
+    <!--  Months  -->
+    <string name="jan">Jan</string>
+    <string name="feb">Feb</string>
+    <string name="mar">Mär</string>
+    <string name="apr">Apr</string>
+    <string name="may">Mai</string>
+    <string name="jun">Jun</string>
+    <string name="jul">Jul</string>
+    <string name="aug">Aug</string>
+    <string name="sep">Sep</string>
+    <string name="oct">Okt</string>
+    <string name="nov">Nov</string>
+    <string name="dec">Dez</string>
+    <string name="blank"></string>
+
+    <!--  Shifts Screen Content  -->
+    <!-- Navigation -->
+    <string name="previous_month">Vorheriger Monat</string>
+    <string name="next_month">Nächster Monat</string>
+
+    <!-- Dialog -->
+    <string name="shift_details">Schichtdetails</string>
+    <string name="edit_shift">Schicht bearbeiten</string>
+    <string name="delete_shift">Schicht löschen</string>
+    <string name="close_dialog">Dialog schließen</string>
+    <string name="date">Datum</string>
+    <string name="your_shift">Ihre Schicht</string>
+    <string name="other_employees_working">Andere Mitarbeiter im Dienst:</string>
+    <string name="no_shifts_scheduled">Keine Schichten geplant.</string>
+    <string name="add_shift">Schicht hinzufügen</string>
+    <string name="you">Du</string>
+</resources>

@@ -1,5 +1,6 @@
 package com.example.shiftschedules.ui.screens
 
+import android.content.Context
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -14,16 +15,23 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Popup
 import com.example.shiftschedules.R
+import com.example.shiftschedules.data.repositories.UserPreferences
 import com.example.shiftschedules.utils.ScrollableScreen
+import com.example.shiftschedules.utils.setAppLocale
+import kotlinx.coroutines.launch
 
 @Composable
 fun SettingsScreen() {
+    val context = LocalContext.current
     ScrollableScreen {
         Column(
             modifier = Modifier
@@ -32,34 +40,40 @@ fun SettingsScreen() {
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
             SettingsRowWithLabel(
-                label = "Name",
-                tooltip = "Your name on shift schedule",
+                label = stringResource(R.string.label_name),
+                tooltip = stringResource(R.string.tooltip_name),
                 icon = R.drawable.id_card
             ) {
-                EditableFieldWithEditIcon(hint = "Enter your name")
+                EditableFieldWithEditIcon(hint = stringResource(R.string.hint_name))
             }
 
             SettingsRowWithLabel(
-                label = "Hours Per Week",
-                tooltip = "Total allowed working hours per week",
+                label = stringResource(R.string.label_hours_per_week),
+                tooltip = stringResource(R.string.tooltip_hours_per_week),
                 icon = R.drawable.hourglass_empty
             ) {
-                EditableFieldWithEditIcon(hint = "0", isIntOnly = true)
+                EditableFieldWithEditIcon(
+                    hint = stringResource(R.string.hint_hours),
+                    isIntOnly = true
+                )
             }
+
             SettingsRowWithLabel(
-                label = "Store Location",
-                tooltip = "Store location (e.g. Pariser Platz)",
+                label = stringResource(R.string.label_store_location),
+                tooltip = stringResource(R.string.tooltip_store_location),
                 icon = R.drawable.location_on
             ) {
-                EditableFieldWithEditIcon(hint = "Enter store location")
+                EditableFieldWithEditIcon(hint = stringResource(R.string.hint_store_location))
             }
+
             SettingsRowWithLabel(
-                label = "Language",
-                tooltip = "Select your preferred language.",
+                label = stringResource(R.string.label_language),
+                tooltip = stringResource(R.string.tooltip_language),
                 icon = R.drawable.translate
             ) {
                 LanguageDropdown()
             }
+
             AlarmSwitchField()
         }
     }
@@ -104,7 +118,7 @@ fun SettingsRowWithLabel(
                         text = label,
                         style = MaterialTheme.typography.bodyLarge,
                         maxLines = 1, // Prevent overflow
-                        overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis
+                        overflow = TextOverflow.Ellipsis
                     )
                     Spacer(modifier = Modifier.width(8.dp))
                     Icon(
@@ -173,7 +187,7 @@ fun EditableFieldWithEditIcon(hint: String, isIntOnly: Boolean = false) {
                     .padding(end = 8.dp),
                 color = MaterialTheme.colorScheme.onSurface,
                 maxLines = 1,
-                overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis
+                overflow = TextOverflow.Ellipsis
             )
             Icon(
                 imageVector = Icons.Default.Edit,
@@ -212,7 +226,7 @@ fun Tooltip(
                     style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.onSurface,
                     maxLines = 3,
-                    overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis
+                    overflow = TextOverflow.Ellipsis
                 )
             }
         }
@@ -222,8 +236,20 @@ fun Tooltip(
 
 @Composable
 fun LanguageDropdown() {
+    val context = LocalContext.current
+    val userPreferences = remember { UserPreferences(context) }
+    val coroutineScope = rememberCoroutineScope()
+
+    // Observing the selected language from DataStore
+    val selectedLanguageFlow = userPreferences.selectedLanguage.collectAsState(initial = "en")
+
+    // Map the selected language to UI text
+    val selectedLanguage = when (selectedLanguageFlow.value) {
+        "de" -> stringResource(R.string.language_german)
+        else -> stringResource(R.string.language_english)
+    }
+
     var expanded by remember { mutableStateOf(false) }
-    var selectedLanguage by remember { mutableStateOf("English") }
 
     Box {
         Text(
@@ -235,16 +261,22 @@ fun LanguageDropdown() {
         )
         DropdownMenu(expanded = expanded, onDismissRequest = { expanded = false }) {
             DropdownMenuItem(
-                text = { Text("English") },
+                text = { Text(stringResource(R.string.language_english)) },
                 onClick = {
-                    selectedLanguage = "English"
+                    coroutineScope.launch {
+                        userPreferences.setLanguage("en")
+                        setAppLocale(context, "en") // Set English locale
+                    }
                     expanded = false
                 }
             )
             DropdownMenuItem(
-                text = { Text("German") },
+                text = { Text(stringResource(R.string.language_german)) },
                 onClick = {
-                    selectedLanguage = "German"
+                    coroutineScope.launch {
+                        userPreferences.setLanguage("de")
+                        setAppLocale(context, "de") // Set German locale
+                    }
                     expanded = false
                 }
             )
@@ -257,7 +289,8 @@ fun LanguageDropdown() {
 fun AlarmSwitchField() {
     var isToggleOn by remember { mutableStateOf(false) }
     var isEditing by remember { mutableStateOf(false) }
-    var text by remember { mutableStateOf("Enter offset") }
+    var alarmOffsetText = stringResource(R.string.hint_offset)
+    var text by remember { mutableStateOf(alarmOffsetText) }
     var showTooltip by remember { mutableStateOf(false) } // State for tooltip
 
     Card(
@@ -305,7 +338,7 @@ fun AlarmSwitchField() {
             }
 
             Tooltip(
-                tooltipText = "Automatically put an alarm X hours before shift",
+                tooltipText = stringResource(R.string.tooltip_alarm),
                 visible = showTooltip,
                 onDismissRequest = { showTooltip = false }
             )
