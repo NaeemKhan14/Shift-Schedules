@@ -1,7 +1,9 @@
 package com.example.shiftschedules.ui.navigation
 
 import android.content.Intent
+import android.net.Uri
 import android.provider.MediaStore
+import android.util.Log
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.Box
@@ -18,11 +20,29 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.example.shiftschedules.R
+import com.example.shiftschedules.data.models.SharedViewModel
 import com.example.shiftschedules.domain.models.BottomNavItem
 import com.example.shiftschedules.utils.NoRippleInteractionSource
 
 @Composable
-fun BottomNavBar(navController: NavHostController) {
+fun BottomNavBar(
+    navController: NavHostController,
+    sharedViewModel: SharedViewModel
+) {
+    val currentBackStackEntry by navController.currentBackStackEntryAsState()
+    val currentRoute = currentBackStackEntry?.destination?.route
+
+    val cameraLauncher = rememberLauncherForActivityResult(ActivityResultContracts.StartActivityForResult()) { }
+    var isCameraMenuExpanded by remember { mutableStateOf(false) }
+
+    val galleryLauncher = rememberLauncherForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
+        if (uri != null) {
+            sharedViewModel.setSelectedImageUri(uri) // Pass the selected image URI to the ViewModel
+            navController.navigate("camera") // Navigate to the Camera screen
+        }
+    }
+    val pdfLauncher = rememberLauncherForActivityResult(ActivityResultContracts.GetContent()) { }
+
     val items = listOf(
         BottomNavItem(stringResource(R.string.nav_home), R.drawable.ic_home, "dashboard"),
         BottomNavItem(stringResource(R.string.nav_shifts), R.drawable.calendar_month, "shifts"),
@@ -30,15 +50,6 @@ fun BottomNavBar(navController: NavHostController) {
         BottomNavItem(stringResource(R.string.nav_statistics), R.drawable.ic_statistics, "statistics"),
         BottomNavItem(stringResource(R.string.nav_settings), R.drawable.ic_settings, "settings")
     )
-
-    val currentBackStackEntry by navController.currentBackStackEntryAsState()
-    val currentRoute = currentBackStackEntry?.destination?.route
-
-    val cameraLauncher = rememberLauncherForActivityResult(ActivityResultContracts.StartActivityForResult()) { }
-    var isCameraMenuExpanded by remember { mutableStateOf(false) }
-
-    val galleryLauncher = rememberLauncherForActivityResult(ActivityResultContracts.GetContent()) { }
-    val pdfLauncher = rememberLauncherForActivityResult(ActivityResultContracts.GetContent()) { }
 
     NavigationBar(
         containerColor = MaterialTheme.colorScheme.background,

@@ -72,4 +72,6 @@ dependencies {
     implementation(libs.accompanist.drawablepainter)
     implementation(libs.ycharts)
     implementation(libs.datastore.preferences)
+    implementation(libs.kotlinx.coroutines.play.services)
+    implementation(libs.coil.compose)
 }

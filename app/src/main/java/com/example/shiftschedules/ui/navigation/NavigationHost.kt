@@ -1,5 +1,7 @@
 package com.example.shiftschedules.ui.navigation
 
+import android.net.Uri
+import android.util.Log
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -11,11 +13,14 @@ import com.example.shiftschedules.ui.screens.ShiftsScreen
 import com.example.shiftschedules.ui.screens.SettingsScreen
 import com.example.shiftschedules.ui.screens.StatisticsScreen
 import com.example.shiftschedules.R
+import com.example.shiftschedules.data.models.SharedViewModel
+import com.example.shiftschedules.ui.screens.CameraScreen
 
 @Composable
 fun NavigationHost(
     navController: NavHostController,
     modifier: Modifier = Modifier,
+    sharedViewModel: SharedViewModel
 ) {
     NavHost(
         navController = navController,
@@ -67,5 +72,8 @@ fun NavigationHost(
 
         // Settings Screen
         composable("settings") { SettingsScreen() }
+
+        // Camera Screen
+        composable("camera") { CameraScreen(sharedViewModel) }
     }
 }
