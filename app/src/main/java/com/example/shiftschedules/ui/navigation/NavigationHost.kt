@@ -15,6 +15,7 @@ import com.example.shiftschedules.ui.screens.StatisticsScreen
 import com.example.shiftschedules.R
 import com.example.shiftschedules.data.models.SharedViewModel
 import com.example.shiftschedules.ui.screens.CameraScreen
+import com.example.shiftschedules.ui.screens.PDFDataProcessing
 
 @Composable
 fun NavigationHost(
@@ -75,5 +76,7 @@ fun NavigationHost(
 
         // Camera Screen
         composable("camera") { CameraScreen(sharedViewModel) }
+
+        composable("pdfProcessing") { PDFDataProcessing(sharedViewModel) }
     }
 }

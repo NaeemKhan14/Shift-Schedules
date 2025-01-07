@@ -5,6 +5,7 @@ import android.net.Uri
 import android.provider.MediaStore
 import android.util.Log
 import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.offset
@@ -41,7 +42,15 @@ fun BottomNavBar(
             navController.navigate("camera") // Navigate to the Camera screen
         }
     }
-    val pdfLauncher = rememberLauncherForActivityResult(ActivityResultContracts.GetContent()) { }
+    val pdfPickerLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.StartActivityForResult()
+    ) { result ->
+        val uri = result.data?.data
+        if (uri != null) {
+            sharedViewModel.selectedPdfUri.value = uri
+            navController.navigate("pdfProcessing")
+        }
+    }
 
     val items = listOf(
         BottomNavItem(stringResource(R.string.nav_home), R.drawable.ic_home, "dashboard"),
@@ -98,7 +107,7 @@ fun BottomNavBar(
                             text = { Text(stringResource(R.string.upload_pdf), maxLines = 1, overflow = TextOverflow.Ellipsis) },
                             onClick = {
                                 isCameraMenuExpanded = false
-                                pdfLauncher.launch("application/pdf")
+                                openPDFPicker(pdfPickerLauncher)
                             }
                         )
                         DropdownMenuItem(
@@ -149,4 +158,12 @@ fun BottomNavBar(
             }
         }
     }
+}
+
+fun openPDFPicker(launcher: ActivityResultLauncher<Intent>) {
+    val intent = Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
+        type = "application/pdf"
+        addCategory(Intent.CATEGORY_OPENABLE)
+    }
+    launcher.launch(intent)
 }
